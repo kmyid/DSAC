@@ -9,11 +9,12 @@ add_definitions(-std=c++11 -Ofast)
 # PNG++
 include(FindPNG)
 include_directories(${PNG_INCLUDE_DIR})
+message(STATUS "PNG Link Libraries: ${PNG_LIBRARY}")
 
 # LUA and Torch
-include_directories(/usr/include/lua5.3)
-include_directories(~/lib/torch/install/include/)
-link_directories(~/lib/torch/install/lib/)
+# include_directories(/usr/include/lua5.3)
+include_directories(~/torch/install/include/)
+link_directories(~/torch/install/lib/)
 
 # OpenCV
 find_package(OpenCV REQUIRED)
@@ -96,7 +97,9 @@ add_executable(train_ransac_softam
     read_data.cpp
     thread_rand.cpp)
   
-target_link_libraries(train_obj ${PNG_LIBRARY} ${OpenCV_LIBS} luajit) 
+target_link_libraries(train_obj ${PNG_LIBRARY} ${OpenCV_LIBS} luajit)
 target_link_libraries(train_score ${PNG_LIBRARY} ${OpenCV_LIBS} luajit)
 target_link_libraries(test_ransac ${PNG_LIBRARY} ${OpenCV_LIBS} luajit)
 target_link_libraries(train_ransac ${PNG_LIBRARY} ${OpenCV_LIBS} luajit)
+target_link_libraries(test_ransac_softam ${PNG_LIBRARY} ${OpenCV_LIBS} luajit)
+target_link_libraries(train_ransac_softam ${PNG_LIBRARY} ${OpenCV_LIBS} luajit)
